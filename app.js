@@ -154,7 +154,10 @@ let timer = {
   current: 668,
   workDuration: 1500,
   breakDuration: 300,
+  daily: 8,
+  finished: 3,
 };
+const saveTimer = () => { localStorage.setItem('timer-v1', JSON.stringify(timer)); };
 const startTimer = interval => {
   if (timer.tid) {
     stopTimer();
@@ -168,9 +171,9 @@ const startTimer = interval => {
     if (timer.current === 0) {
       stopTimer(true);
     }
-    localStorage.setItem('timer-v1', JSON.stringify(timer));
+    saveTimer();
   }, 1000);
-  localStorage.setItem('timer-v1', JSON.stringify(timer));
+  saveTimer();
 };
 const stopTimer = reset => {
   clearInterval(timer.tid);
@@ -178,10 +181,10 @@ const stopTimer = reset => {
   if (reset) {
     timer.current = 0;
   }
-  localStorage.setItem('timer-v1', JSON.stringify(timer));
+  saveTimer();
 };
 
-timer = JSON.parse(localStorage.getItem('timer-v1') || JSON.stringify(timer));
+timer = Object.assign(timer, JSON.parse(localStorage.getItem('timer-v1')||'{}'));
 if (timer.tid) {
   startTimer();
 }
@@ -196,7 +199,7 @@ const RouteMain = {
       <countdown :total="total" :current="current" :running="!!tid"
       v-on:pause="pause" v-on:resume="resume" v-on:stop="stop"
       v-on:work="startWork" v-on:break="startBreak" />
-      <day-stats total="7" finished="3" />
+      <day-stats :total="daily" :finished="finished" />
     </div>
   `,
   components: {
