@@ -1,11 +1,32 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-* { margin: 0; padding: 0; box-sizing: border-box; user-select: none; outline: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; user-select: none; outline: 0; font-family: 'Roboto', sans-serif; }
 html, body, #app { height: 100%; }
 svg { line-height: 0; }
+ul, li { list-style: none; }
 
-body {
-	background-color: #111;
+/*
+:root {
+	--theme-bg-color: #ffffff;
+	--theme-fg-color: #000000;
+	--theme-accent-color: #e91e63;
 }
+*/
+
+/*
+:root {
+	--theme-bg-color: #e91e63;
+	--theme-fg-color: #ffffff;
+	--theme-accent-color: #000000;
+}
+*/
+
+:root {
+	--theme-bg-color: #000000;
+	--theme-fg-color: #ffffff;
+	--theme-accent-color: #e91e63;
+}
+
+body { background-color: var(--theme-bg-color); }
 
 .toolbar {
 	position: fixed;
@@ -23,18 +44,19 @@ body {
 	height: 48px;
 	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
 }
 .day-stats .dot {
-	width: 12px;
-	height: 12px;
+	width: 8px;
+	height: 8px;
 	border-radius: 50%;
-	background-color: #ffffff;
-	margin: 0 6px;
+	background-color: var(--theme-fg-color);
+	margin: 0 4px;
 }
 .dot.finished {
-	background-color: #e91e63;
+	background-color: var(--theme-accent-color);
 }
 .dot.half {
 }
@@ -73,9 +95,9 @@ body {
 	justify-content: center;
 }
 .countdown {
-	color: white;
+	color: var(--theme-fg-color);
 	font-size: 30vmin;
-	font-family: 'Roboto';
+	font-family: 'Roboto', sans-serif;
 	font-weight: bold;
 }
 .buttons {
@@ -88,12 +110,46 @@ body {
 }
 .btn {
 	cursor: pointer;
-	color: white;
+	color: var(--theme-fg-color);
 	min-width: 20vmin;
 	margin: 8px;
-	font-family: 'Roboto';
+	font-family: 'Roboto', sans-serif;
 	font-weight: bold;
 	font-size: 4vmin;
 	text-align: center;
 }
 
+
+.settings {
+	display: flex;
+	color: var(--theme-fg-color);
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	font-weight: 900;
+}
+.settings h2 {
+	font-size: 6vmin;
+}
+.settings ul {
+	display: flex;
+}
+.settings li {
+	width: 15vmin;
+	height: 15vmin;
+	max-width: 128px;
+	max-height: 128px;
+	font-size: 4vmin;
+	border: 2px solid var(--theme-fg-color);
+	border-radius: 8px;
+	margin: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 900;
+	cursor: pointer;
+}
+.settings li.selected {
+	background-color: var(--theme-accent-color);
+}
